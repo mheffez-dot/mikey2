@@ -1,250 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CPS Vendor Validator</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPS Vendor Validator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
 
-    .card {
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-      padding: 40px;
-      width: 100%;
-      max-width: 800px;
-      text-align: center;
-    }
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
 
-    h1 {
-      color: #1a1a2e;
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            margin-bottom: 30px;
+        }
 
-    .info-section {
-      text-align: left;
-      margin-bottom: 32px;
-    }
+        h1 {
+            color: #1a1a2e;
+            font-size: 2rem;
+            margin-bottom: 8px;
+            text-align: center;
+        }
 
-    .info-section h2 {
-      color: #1a1a2e;
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
 
-    .tagline {
-      color: #374151;
-      font-size: 15px;
-      line-height: 1.6;
-      margin-bottom: 24px;
-      background: #f3f4f6;
-      padding: 16px;
-      border-radius: 8px;
-    }
+        .description {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
 
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
-    }
+        .description h2 {
+            color: #667eea;
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+        }
 
-    .feature-card {
-      background: #f9fafb;
-      border-radius: 12px;
-      padding: 20px;
-      text-align: left;
-      border: 1px solid #e5e7eb;
-    }
+        .description p {
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
 
-    .feature-icon {
-      font-size: 28px;
-      margin-bottom: 12px;
-    }
+        .description ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+            color: #444;
+            line-height: 1.7;
+        }
 
-    .feature-card h3 {
-      color: #1a1a2e;
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
+        .description li {
+            margin-bottom: 8px;
+        }
 
-    .feature-card ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+        .highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
 
-    .feature-card li {
-      color: #6b7280;
-      font-size: 13px;
-      line-height: 1.7;
-      padding-left: 16px;
-      position: relative;
-    }
+        .highlight h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
 
-    .feature-card li::before {
-      content: "•";
-      color: #667eea;
-      font-weight: bold;
-      position: absolute;
-      left: 0;
-    }
+        .highlight p {
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.6;
+            margin: 0;
+        }
 
-    p.instructions {
-      color: #6b7280;
-      font-size: 14px;
-      line-height: 1.5;
-      margin-bottom: 32px;
-    }
+        .upload-section {
+            text-align: center;
+            padding: 30px 0;
+        }
 
-    .form-group {
-      margin-bottom: 24px;
-      text-align: left;
-    }
+        .instructions {
+            color: #555;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
 
-    label {
-      display: block;
-      color: #374151;
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
+        .file-input-wrapper {
+            margin-bottom: 25px;
+        }
 
-    input[type="file"] {
-      width: 100%;
-      padding: 12px;
-      border: 2px dashed #d1d5db;
-      border-radius: 8px;
-      background: #f9fafb;
-      cursor: pointer;
-      transition: border-color 0.2s ease, background-color 0.2s ease;
-    }
+        input[type="file"] {
+            display: none;
+        }
 
-    input[type="file"]:hover {
-      border-color: #667eea;
-      background: #f3f4f6;
-    }
+        .file-label {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 30px;
+            border: 2px dashed #667eea;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #667eea;
+            font-weight: 500;
+            background: #f8f9ff;
+            width: 100%;
+            max-width: 400px;
+        }
 
-    input[type="file"]:focus {
-      outline: none;
-      border-color: #667eea;
-      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    }
+        .file-label:hover {
+            background: #eef0ff;
+            border-color: #764ba2;
+            color: #764ba2;
+        }
 
-    button {
-      width: 100%;
-      padding: 14px 24px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: #ffffff;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
+        .file-label svg {
+            margin-right: 10px;
+            width: 24px;
+            height: 24px;
+        }
 
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-    }
+        .file-name {
+            margin-top: 10px;
+            color: #666;
+            font-size: 0.9rem;
+        }
 
-    button:active {
-      transform: translateY(0);
-    }
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 16px 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
 
-    @media (max-width: 480px) {
-      .card {
-        padding: 32px 24px;
-      }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
 
-      h1 {
-        font-size: 20px;
-      }
+        .submit-btn:active {
+            transform: translateY(0);
+        }
 
-      p.instructions {
-        font-size: 13px;
-      }
-    }
-  </style>
+        @media (max-width: 600px) {
+            .card {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .description h2 {
+                font-size: 1.1rem;
+            }
+
+            .submit-btn {
+                width: 100%;
+                padding: 16px 30px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="card">
-    <h1>CPS Vendor Validator</h1>
-    
-    <section class="info-section">
-      <h2>What It Does</h2>
-      <p class="tagline">You give it a list of vendor websites, and it tells you which ones sell products CPS can write extended warranties on.</p>
-      
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🔍</div>
-          <h3>How It Works</h3>
-          <ul>
-            <li>Fetches each website (direct fetch first, Bright Data for bot-protected sites)</li>
-            <li>Reads page content — title, description, product/category menu</li>
-            <li>Classifies with DeepSeek against CPS coverage policy</li>
-            <li>Covered: electronics, appliances, tools, firearms</li>
-            <li>Excluded: apparel, food, services, software</li>
-          </ul>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">📊</div>
-          <h3>What You Get</h3>
-          <ul>
-            <li>Verdict: Pass / Fail / Mixed per domain</li>
-            <li>Confidence score & matched category</li>
-            <li>Real quoted evidence + one-line reason</li>
-            <li>Results written to Google Sheet</li>
-            <li>Email with CSV attached</li>
-            <li>Automatic duplicate skipping</li>
-          </ul>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <h3>Fast & Affordable</h3>
-          <ul>
-            <li>Processes ~20 domains in parallel</li>
-            <li>~$0.002 per site (often less)</li>
-            <li>Easy sites skip Bright Data proxy</li>
-            <li>Automatic provider outage detection</li>
-            <li>Turns hours of manual work into minutes</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+    <div class="container">
+        <div class="card">
+            <h1>CPS Vendor Validator</h1>
+            <p class="subtitle">Automated vendor warrantability screening</p>
 
-    <form method="post" enctype="multipart/form-data" action="https://pvd.pei.mybluehost.me/form/9c8d7e6f-5a4b-4c3d-8e2f-1a0b9c8d7e6f">
-      <p class="instructions">Upload a CSV of vendor domains to start validation.</p>
-      
-      <div class="form-group">
-        <label for="domains_csv">CSV File</label>
-        <input type="file" id="domains_csv" name="domains_csv" accept=".csv" required>
-      </div>
-      
-      <button type="submit">Start Validation</button>
-    </form>
-  </div>
+            <div class="description">
+                <h2>What It Does</h2>
+                <p>You give it a list of vendor websites, and it tells you which ones sell products CPS can write extended warranties on.</p>
+
+                <h2>How It Works</h2>
+                <p>For each domain you submit:</p>
+                <ul>
+                    <li><strong>Fetches the website</strong> — Direct fetch first, with Bright Data's unblocker for bot-protected sites</li>
+                    <li><strong>Reads the page</strong> — Extracts title, description, and product/category menu</li>
+                    <li><strong>Classifies with AI</strong> — Uses DeepSeek against your CPS coverage policy (covered = powered/durable high-ticket goods like electronics, appliances, tools, firearms; excluded = apparel, food, services, software, etc.)</li>
+                    <li><strong>Records a verdict</strong> — Pass / Fail / Mixed, plus confidence score, matched category, real quoted evidence, and a one-line reason</li>
+                </ul>
+
+                <h2>What You Get</h2>
+                <ul>
+                    <li>Results written to a Google Sheet (one row per vendor) + a per-run summary</li>
+                    <li>An email with the results CSV attached</li>
+                    <li>Automatic duplicate skipping (won't re-check or re-bill domains already processed)</li>
+                </ul>
+
+                <div class="highlight">
+                    <h3>Processing Details</h3>
+                    <p>Upload a CSV of domains via the form below. It processes ~20 sites at a time in parallel at ~$0.002/site (often less since easy sites skip Bright Data). Provider outages are flagged automatically. Replaces hours of manual site visits with scored, evidence-backed Pass/Fail results in minutes.</p>
+                </div>
+            </div>
+
+            <div class="upload-section">
+                <p class="instructions">Upload a CSV of vendor domains to start validation.</p>
+
+                <form method="post" enctype="multipart/form-data" action="https://pvd.pei.mybluehost.me/form/9c8d7e6f-5a4b-4c3d-8e2f-1a0b9c8d7e6f">
+                    <div class="file-input-wrapper">
+                        <label for="domains_csv" class="file-label">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                            </svg>
+                            Choose CSV File
+                        </label>
+                        <input type="file" id="domains_csv" name="domains_csv" accept=".csv" required>
+                        <div class="file-name" id="file-name">No file chosen</div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Start Validation</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('domains_csv').addEventListener('change', function(e) {
+            var fileName = e.target.files[0] ? e.target.files[0].name : 'No file chosen';
+            document.getElementById('file-name').textContent = fileName;
+        });
+    </script>
 </body>
 </html>
