@@ -6,15 +6,18 @@
     <title>CPS Vendor Validator</title>
     <style>
         :root {
-            --cps-blue: #003366;
-            --cps-light-blue: #0055a5;
-            --cps-accent: #00aaff;
-            --cps-gray: #f4f6f9;
-            --text-dark: #1a1a1a;
-            --text-muted: #555;
+            --cps-deep-blue: #0B2545;
+            --cps-corporate-blue: #134074;
+            --cps-accent: #1a5f9e;
+            --bg-light: #f5f7fa;
+            --bg-tint: #e8ecf1;
             --white: #ffffff;
-            --shadow: 0 10px 30px rgba(0, 51, 102, 0.15);
-            --radius: 12px;
+            --text-primary: #0B2545;
+            --text-secondary: #134074;
+            --shadow-soft: 0 10px 40px rgba(11, 37, 69, 0.12);
+            --shadow-hover: 0 15px 50px rgba(11, 37, 69, 0.15);
+            --radius: 16px;
+            --radius-sm: 8px;
         }
 
         * {
@@ -25,370 +28,347 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
-            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-tint) 100%);
+            color: var(--text-primary);
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-        }
-
-        header {
-            background: var(--cps-blue);
-            color: var(--white);
-            padding: 1.5rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 40px 20px;
         }
 
         .container {
             max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
             width: 100%;
+            margin: 0 auto;
         }
 
-        .logo {
-            font-size: 1.8rem;
+        /* Header Styles */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
             font-weight: 700;
+            color: var(--cps-deep-blue);
+            margin-bottom: 8px;
             letter-spacing: -0.5px;
-            text-decoration: none;
-            color: var(--white);
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        .logo span {
-            color: var(--cps-accent);
+        header p {
+            font-size: 1.1rem;
+            color: var(--cps-corporate-blue);
+            opacity: 0.8;
         }
 
-        main {
-            flex: 1;
-            padding: 3rem 0;
-        }
-
-        .card {
+        /* Main Card Styles */
+        .main-card {
             background: var(--white);
             border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            border-top: 4px solid var(--cps-accent);
+            box-shadow: var(--shadow-soft);
+            padding: 40px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        h1 {
-            color: var(--cps-blue);
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
+        .main-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
         }
 
-        .subtitle {
-            color: var(--text-muted);
+        .upload-section {
+            text-align: center;
+        }
+
+        .instruction {
             font-size: 1.1rem;
-            margin-bottom: 2rem;
+            color: var(--cps-deep-blue);
+            margin-bottom: 24px;
+            font-weight: 500;
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--cps-blue);
-        }
-
-        input[type="file"] {
-            width: 100%;
-            padding: 1rem;
-            border: 2px dashed #cbd5e0;
-            border-radius: 8px;
-            background: var(--cps-gray);
+        /* File Drop Zone */
+        .file-drop-zone {
+            border: 2px dashed var(--cps-corporate-blue);
+            border-radius: var(--radius);
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f0f4f8 100%);
             cursor: pointer;
             transition: all 0.3s ease;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .file-drop-zone:hover {
+            border-color: var(--cps-deep-blue);
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8edf2 100%);
+        }
+
+        .file-drop-zone.dragover {
+            border-color: var(--cps-deep-blue);
+            background: linear-gradient(135deg, #e8f0f8 0%, #dce5ef 100%);
+            transform: scale(1.02);
+        }
+
+        .file-drop-zone input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-icon {
+            font-size: 3rem;
+            color: var(--cps-corporate-blue);
+            margin-bottom: 12px;
+        }
+
+        .file-label {
             font-size: 1rem;
+            color: var(--cps-deep-blue);
+            font-weight: 500;
         }
 
-        input[type="file"]:hover {
-            border-color: var(--cps-accent);
-            background: #ebf8ff;
+        .file-hint {
+            font-size: 0.875rem;
+            color: var(--cps-corporate-blue);
+            opacity: 0.7;
+            margin-top: 8px;
         }
 
-        input[type="file"]:focus {
-            outline: none;
-            border-color: var(--cps-blue);
-            box-shadow: 0 0 0 3px rgba(0, 170, 255, 0.2);
-        }
-
-        .btn-submit {
-            background: linear-gradient(135deg, var(--cps-blue) 0%, var(--cps-light-blue) 100%);
+        /* Submit Button */
+        .submit-btn {
+            background: linear-gradient(135deg, var(--cps-deep-blue) 0%, var(--cps-corporate-blue) 100%);
             color: var(--white);
             border: none;
-            padding: 1rem 2rem;
+            padding: 16px 48px;
             font-size: 1.1rem;
             font-weight: 600;
-            border-radius: 8px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
-            width: 100%;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(11, 37, 69, 0.3);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        .btn-submit:hover {
+        .submit-btn:hover {
+            background: linear-gradient(135deg, var(--cps-corporate-blue) 0%, var(--cps-deep-blue) 100%);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 51, 102, 0.3);
+            box-shadow: 0 6px 20px rgba(11, 37, 69, 0.4);
         }
 
-        .btn-submit:active {
+        .submit-btn:active {
             transform: translateY(0);
         }
 
+        /* Info Section */
         .info-section {
             background: var(--white);
             border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 2.5rem;
-            margin-bottom: 2rem;
+            box-shadow: var(--shadow-soft);
+            padding: 40px;
         }
 
         .info-section h2 {
-            color: var(--cps-blue);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid var(--cps-gray);
-            padding-bottom: 0.5rem;
-        }
-
-        .info-section h3 {
-            color: var(--cps-light-blue);
-            font-size: 1.2rem;
-            margin: 1.5rem 0 0.75rem;
-        }
-
-        .info-section p, .info-section li {
-            color: var(--text-muted);
-            margin-bottom: 0.75rem;
-            font-size: 1rem;
-        }
-
-        .info-section ul {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .info-section li {
-            margin-bottom: 0.5rem;
-        }
-
-        .highlight-box {
-            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
-            border-left: 4px solid var(--cps-accent);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin: 1.5rem 0;
-        }
-
-        .highlight-box strong {
-            color: var(--cps-blue);
-        }
-
-        .step {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            align-items: flex-start;
-        }
-
-        .step-number {
-            background: var(--cps-blue);
-            color: var(--white);
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-        }
-
-        /* Success Message Styles */
-        .success-container {
-            display: none;
-            text-align: center;
-            padding: 3rem 2rem;
-        }
-
-        .success-icon {
-            width: 80px;
-            height: 80px;
-            background: #48bb78;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2.5rem;
-            color: white;
-            animation: scaleIn 0.5s ease;
-        }
-
-        @keyframes scaleIn {
-            from { transform: scale(0); }
-            to { transform: scale(1); }
-        }
-
-        .success-title {
-            color: var(--cps-blue);
             font-size: 1.8rem;
+            color: var(--cps-deep-blue);
+            margin-bottom: 16px;
             font-weight: 700;
-            margin-bottom: 1rem;
         }
 
-        .success-message {
-            color: var(--text-muted);
+        .summary {
             font-size: 1.1rem;
-            max-width: 500px;
-            margin: 0 auto;
+            color: var(--cps-corporate-blue);
+            margin-bottom: 32px;
+            line-height: 1.6;
+            padding-left: 20px;
+            border-left: 4px solid var(--cps-deep-blue);
         }
 
-        .back-link {
-            display: inline-block;
-            margin-top: 2rem;
-            color: var(--cps-light-blue);
-            text-decoration: none;
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+        @media (min-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .info-block h3 {
+            font-size: 1.3rem;
+            color: var(--cps-deep-blue);
+            margin-bottom: 16px;
             font-weight: 600;
-            padding: 0.75rem 1.5rem;
-            border: 2px solid var(--cps-light-blue);
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .back-link:hover {
-            background: var(--cps-light-blue);
-            color: var(--white);
+        .info-block h3::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--cps-deep-blue);
+            border-radius: 50%;
         }
 
-        footer {
-            background: var(--cps-blue);
-            color: var(--white);
-            text-align: center;
-            padding: 1.5rem 0;
-            margin-top: auto;
+        .feature-list {
+            list-style: none;
         }
 
-        footer p {
-            opacity: 0.9;
-            font-size: 0.9rem;
+        .feature-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #e8ecf1;
+            color: var(--cps-corporate-blue);
+            line-height: 1.6;
+            font-size: 0.95rem;
         }
 
-        @media (max-width: 768px) {
-            .card, .info-section {
-                padding: 1.5rem;
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list strong {
+            color: var(--cps-deep-blue);
+            font-weight: 600;
+        }
+
+        .selected-file {
+            display: none;
+            margin-top: 12px;
+            padding: 12px;
+            background: #e8f0f8;
+            border-radius: var(--radius-sm);
+            color: var(--cps-deep-blue);
+            font-weight: 500;
+        }
+
+        .selected-file.visible {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 15px;
             }
 
-            h1 {
-                font-size: 1.5rem;
+            header h1 {
+                font-size: 2rem;
             }
 
-            .logo {
-                font-size: 1.4rem;
+            .main-card,
+            .info-section {
+                padding: 24px;
+            }
+
+            .submit-btn {
+                width: 100%;
+                padding: 16px;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <a href="https://cpscentral.com" class="logo">
-                CPS<span>Central</span> Vendor Validator
-            </a>
-        </div>
-    </header>
+    <div class="container">
+        <header>
+            <h1>CPS Vendor Validator</h1>
+            <p>Consumer Priority Service</p>
+        </header>
 
-    <main>
-        <div class="container">
-            <!-- Upload Form Card -->
-            <div class="card" id="uploadCard">
-                <h1>CPS Vendor Validator</h1>
-                <p class="subtitle">Upload a CSV of vendor domains to start validation.</p>
+        <div class="main-card">
+            <div class="upload-section">
+                <p class="instruction">Upload a CSV of vendor domains to start validation.</p>
                 
                 <form method="post" enctype="multipart/form-data" action="https://pvd.pei.mybluehost.me/form/9c8d7e6f-5a4b-4c3d-8e2f-1a0b9c8d7e6f">
-                    <div class="form-group">
-                        <label for="domains_csv">Vendor Domains CSV</label>
-                        <input type="file" id="domains_csv" name="domains_csv" accept=".csv" required>
+                    <div class="file-drop-zone" id="dropZone">
+                        <input type="file" name="domains_csv" required accept=".csv" id="fileInput">
+                        <div class="file-icon">📁</div>
+                        <div class="file-label">Click to select or drag and drop your CSV file</div>
+                        <div class="file-hint">Only .csv files are accepted</div>
                     </div>
-                    <button type="submit" class="btn-submit">Start Validation</button>
+                    
+                    <div class="selected-file" id="selectedFile"></div>
+                    
+                    <button type="submit" class="submit-btn">Start Validation</button>
                 </form>
             </div>
+        </div>
 
-            <!-- Success Message (shown after form submission via URL parameter or redirect) -->
-            <div class="card success-container" id="successCard">
-                <div class="success-icon">✓</div>
-                <h2 class="success-title">Form Submitted Successfully!</h2>
-                <p class="success-message">
-                    Your vendor list is being processed. You should receive the results in your inbox soon.
-                </p>
-                <a href="index.html" class="back-link">← Back to Upload</a>
-            </div>
-
-            <!-- Information Section -->
-            <div class="info-section">
-                <h2>What is the CPS Vendor Validator?</h2>
-                <p><strong>In one line:</strong> You give it a list of vendor websites, and it tells you which ones sell products CPS can write extended warranties on.</p>
-
-                <h3>How It Works</h3>
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div><strong>Fetch:</strong> Retrieves the website (free direct fetch first, Bright Data's unblocker for bot-protected sites).</div>
+        <div class="info-section">
+            <h2>What is the CPS Vendor Validator?</h2>
+            <p class="summary">Upload a list of vendor websites, and instantly determine which ones sell products qualified for CPS extended warranties.</p>
+            
+            <div class="info-grid">
+                <div class="info-block">
+                    <h3>How It Works</h3>
+                    <ul class="feature-list">
+                        <li><strong>Smart Crawling:</strong> Fetches pages using direct fetch or advanced unblockers for bot-protected sites.</li>
+                        <li><strong>AI Classification:</strong> Utilizes DeepSeek to analyze page titles, descriptions, and menus against the CPS coverage policy (Covered: electronics, appliances, tools, firearms; Excluded: apparel, food, services, software).</li>
+                        <li><strong>Detailed Verdicts:</strong> Delivers a Pass/Fail/Mixed verdict, confidence score, category mapping, and quoted evidence.</li>
+                    </ul>
                 </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div><strong>Read:</strong> Analyzes the page — title, description, and product/category menu.</div>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div><strong>Classify:</strong> Uses DeepSeek AI against CPS coverage policy (covered = powered/durable high-ticket goods like electronics, appliances, tools, firearms; excluded = apparel, food, services, software, etc.).</div>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div><strong>Record:</strong> Generates a verdict (Pass / Fail / Mixed) with confidence score, matched category, real quoted evidence, and a one-line reason.</div>
-                </div>
-
-                <h3>What You Get</h3>
-                <ul>
-                    <li>Results written to a Google Sheet (one row per vendor) + a per-run summary</li>
-                    <li>An email with the results CSV attached</li>
-                    <li>Automatic duplicate skipping (won't re-check or re-bill domains already processed)</li>
-                </ul>
-
-                <div class="highlight-box">
-                    <p><strong>Processing Details:</strong> Upload a CSV of domains via this form. The system processes ~20 sites at a time in parallel at approximately $0.002/site (often less since easy sites skip Bright Data). Any provider outages are flagged automatically.</p>
-                    <p style="margin-top: 0.5rem;"><strong>Bottom Line:</strong> Replaces hours of manually visiting vendor sites and judging warrantability — turning a list of domains into a scored, evidence-backed Pass/Fail sheet in minutes.</p>
+                
+                <div class="info-block">
+                    <h3>What You Receive</h3>
+                    <ul class="feature-list">
+                        <li><strong>Automated Google Sheet logging</strong> (one row per vendor) + a run summary.</li>
+                        <li><strong>Email delivery</strong> with the comprehensive results CSV attached.</li>
+                        <li><strong>Duplicate skipping</strong> to save time and API costs.</li>
+                        <li><strong>High-speed parallel processing</strong> (~20 sites at a time) at fractions of a cent per site.</li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 CPS Central. All rights reserved.</p>
-        </div>
-    </footer>
+    </div>
 
     <script>
-        // Check for success message trigger (e.g., ?submitted=true)
-        window.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('submitted') === 'true' || urlParams.get('success') === 'true') {
-                document.getElementById('uploadCard').style.display = 'none';
-                document.getElementById('successCard').style.display = 'block';
+        const fileInput = document.getElementById('fileInput');
+        const dropZone = document.getElementById('dropZone');
+        const selectedFile = document.getElementById('selectedFile');
+
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                selectedFile.textContent = '✓ Selected: ' + file.name;
+                selectedFile.classList.add('visible');
             }
         });
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight() {
+            dropZone.classList.add('dragover');
+        }
+
+        function unhighlight() {
+            dropZone.classList.remove('dragover');
+        }
     </script>
 </body>
 </html>
