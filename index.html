@@ -3,21 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CPS Vendor Validator</title>
+    <title>CPS Vendor Validator - Consumer Priority Service</title>
     <style>
         :root {
-            --cps-deep-blue: #0B2545;
-            --cps-corporate-blue: #134074;
-            --cps-accent: #1a5f9e;
-            --bg-light: #f5f7fa;
-            --bg-tint: #e8ecf1;
+            --cps-blue: #1a5f9e;
+            --cps-dark-blue: #0B2545;
+            --cps-navy: #134074;
+            --cps-light-blue: #e8f4f8;
             --white: #ffffff;
-            --text-primary: #0B2545;
-            --text-secondary: #134074;
-            --shadow-soft: 0 10px 40px rgba(11, 37, 69, 0.12);
-            --shadow-hover: 0 15px 50px rgba(11, 37, 69, 0.15);
-            --radius: 16px;
+            --gray-50: #f8f9fa;
+            --gray-100: #f5f7fa;
+            --gray-200: #e8ecf1;
+            --gray-600: #6b7280;
+            --gray-800: #1f2937;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 25px rgba(11, 37, 69, 0.1);
+            --shadow-xl: 0 20px 40px rgba(11, 37, 69, 0.12);
             --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
         }
 
         * {
@@ -27,88 +32,116 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-tint) 100%);
-            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--gray-100);
+            color: var(--gray-800);
             line-height: 1.6;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            padding: 40px 20px;
         }
 
-        .container {
-            max-width: 900px;
-            width: 100%;
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--cps-dark-blue) 0%, var(--cps-navy) 100%);
+            color: var(--white);
+            padding: 80px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
             margin: 0 auto;
         }
 
-        /* Header Styles */
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
+        .hero h1 {
+            font-size: 3rem;
             font-weight: 700;
-            color: var(--cps-deep-blue);
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+            line-height: 1.2;
         }
 
-        header p {
-            font-size: 1.1rem;
-            color: var(--cps-corporate-blue);
-            opacity: 0.8;
+        .hero h1 span {
+            color: #64b5f6;
         }
 
-        /* Main Card Styles */
-        .main-card {
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1000px;
+            margin: -60px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Upload Card */
+        .upload-card {
             background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-soft);
-            padding: 40px;
-            margin-bottom: 30px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+            padding: 48px;
+            margin-bottom: 32px;
         }
 
-        .main-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .upload-section {
+        .upload-header {
             text-align: center;
+            margin-bottom: 32px;
         }
 
-        .instruction {
-            font-size: 1.1rem;
-            color: var(--cps-deep-blue);
-            margin-bottom: 24px;
-            font-weight: 500;
+        .upload-header h2 {
+            font-size: 1.75rem;
+            color: var(--cps-dark-blue);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .upload-header p {
+            color: var(--gray-600);
+            font-size: 1rem;
         }
 
         /* File Drop Zone */
         .file-drop-zone {
-            border: 2px dashed var(--cps-corporate-blue);
-            border-radius: var(--radius);
-            padding: 40px 20px;
-            background: linear-gradient(135deg, #f8fafc 0%, #f0f4f8 100%);
+            border: 2px dashed var(--cps-blue);
+            border-radius: var(--radius-lg);
+            padding: 60px 40px;
+            background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-bottom: 24px;
+            text-align: center;
             position: relative;
         }
 
         .file-drop-zone:hover {
-            border-color: var(--cps-deep-blue);
-            background: linear-gradient(135deg, #f0f4f8 0%, #e8edf2 100%);
+            border-color: var(--cps-dark-blue);
+            background: linear-gradient(135deg, var(--cps-light-blue) 0%, var(--gray-100) 100%);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .file-drop-zone.dragover {
-            border-color: var(--cps-deep-blue);
-            background: linear-gradient(135deg, #e8f0f8 0%, #dce5ef 100%);
+            border-color: var(--cps-dark-blue);
+            background: linear-gradient(135deg, #d4e5f0 0%, var(--cps-light-blue) 100%);
             transform: scale(1.02);
         }
 
@@ -122,45 +155,78 @@
             cursor: pointer;
         }
 
-        .file-icon {
-            font-size: 3rem;
-            color: var(--cps-corporate-blue);
-            margin-bottom: 12px;
+        .upload-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--cps-blue) 0%, var(--cps-navy) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            box-shadow: var(--shadow-md);
         }
 
         .file-label {
-            font-size: 1rem;
-            color: var(--cps-deep-blue);
-            font-weight: 500;
+            font-size: 1.25rem;
+            color: var(--cps-dark-blue);
+            font-weight: 600;
+            margin-bottom: 8px;
         }
 
         .file-hint {
-            font-size: 0.875rem;
-            color: var(--cps-corporate-blue);
-            opacity: 0.7;
-            margin-top: 8px;
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
+
+        .selected-file {
+            display: none;
+            margin-top: 20px;
+            padding: 16px 20px;
+            background: var(--cps-light-blue);
+            border-radius: var(--radius-md);
+            color: var(--cps-dark-blue);
+            font-weight: 500;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .selected-file.visible {
+            display: flex;
+        }
+
+        .selected-file-icon {
+            color: var(--cps-blue);
+            font-size: 1.25rem;
         }
 
         /* Submit Button */
         .submit-btn {
-            background: linear-gradient(135deg, var(--cps-deep-blue) 0%, var(--cps-corporate-blue) 100%);
+            background: linear-gradient(135deg, var(--cps-blue) 0%, var(--cps-navy) 100%);
             color: var(--white);
             border: none;
-            padding: 16px 48px;
+            padding: 18px 48px;
             font-size: 1.1rem;
             font-weight: 600;
-            border-radius: var(--radius-sm);
+            border-radius: var(--radius-md);
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(11, 37, 69, 0.3);
+            box-shadow: 0 4px 15px rgba(26, 95, 158, 0.3);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-top: 24px;
+            width: 100%;
+            max-width: 400px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .submit-btn:hover {
-            background: linear-gradient(135deg, var(--cps-corporate-blue) 0%, var(--cps-deep-blue) 100%);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(11, 37, 69, 0.4);
+            box-shadow: 0 6px 20px rgba(26, 95, 158, 0.4);
         }
 
         .submit-btn:active {
@@ -170,25 +236,28 @@
         /* Info Section */
         .info-section {
             background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-soft);
-            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: 48px;
         }
 
-        .info-section h2 {
-            font-size: 1.8rem;
-            color: var(--cps-deep-blue);
-            margin-bottom: 16px;
+        .info-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .info-header h2 {
+            font-size: 2rem;
+            color: var(--cps-dark-blue);
+            margin-bottom: 12px;
             font-weight: 700;
         }
 
-        .summary {
+        .info-header p {
             font-size: 1.1rem;
-            color: var(--cps-corporate-blue);
-            margin-bottom: 32px;
-            line-height: 1.6;
-            padding-left: 20px;
-            border-left: 4px solid var(--cps-deep-blue);
+            color: var(--gray-600);
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         .info-grid {
@@ -203,23 +272,30 @@
             }
         }
 
-        .info-block h3 {
-            font-size: 1.3rem;
-            color: var(--cps-deep-blue);
-            margin-bottom: 16px;
+        .info-card {
+            background: var(--gray-50);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            border-left: 4px solid var(--cps-blue);
+        }
+
+        .info-card h3 {
+            font-size: 1.25rem;
+            color: var(--cps-dark-blue);
+            margin-bottom: 20px;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
         }
 
-        .info-block h3::before {
+        .info-card h3::before {
             content: '';
-            display: inline-block;
             width: 8px;
             height: 8px;
-            background: var(--cps-deep-blue);
+            background: var(--cps-blue);
             border-radius: 50%;
+            display: inline-block;
         }
 
         .feature-list {
@@ -228,10 +304,12 @@
 
         .feature-list li {
             padding: 12px 0;
-            border-bottom: 1px solid #e8ecf1;
-            color: var(--cps-corporate-blue);
+            border-bottom: 1px solid var(--gray-200);
+            color: var(--gray-800);
             line-height: 1.6;
             font-size: 0.95rem;
+            display: flex;
+            gap: 12px;
         }
 
         .feature-list li:last-child {
@@ -239,109 +317,158 @@
         }
 
         .feature-list strong {
-            color: var(--cps-deep-blue);
+            color: var(--cps-dark-blue);
             font-weight: 600;
         }
 
-        .selected-file {
-            display: none;
-            margin-top: 12px;
-            padding: 12px;
-            background: #e8f0f8;
-            border-radius: var(--radius-sm);
-            color: var(--cps-deep-blue);
-            font-weight: 500;
+        .feature-list .check {
+            color: var(--cps-blue);
+            font-weight: bold;
         }
 
-        .selected-file.visible {
-            display: block;
+        /* Footer */
+        .footer {
+            background: var(--cps-dark-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 32px 24px;
+            margin-top: 60px;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            font-size: 0.9rem;
         }
 
         /* Responsive */
-        @media (max-width: 600px) {
-            body {
-                padding: 20px 15px;
-            }
-
-            header h1 {
+        @media (max-width: 768px) {
+            .hero h1 {
                 font-size: 2rem;
             }
 
-            .main-card,
-            .info-section {
-                padding: 24px;
+            .hero p {
+                font-size: 1rem;
             }
 
-            .submit-btn {
-                width: 100%;
-                padding: 16px;
+            .upload-card,
+            .info-section {
+                padding: 32px 24px;
+            }
+
+            .file-drop-zone {
+                padding: 40px 24px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>CPS Vendor Validator</h1>
-            <p>Consumer Priority Service</p>
-        </header>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Vendor Validation <span>Tool</span></h1>
+            <p>Instantly verify which vendors qualify for CPS extended warranty protection plans</p>
+        </div>
+    </section>
 
-        <div class="main-card">
-            <div class="upload-section">
-                <p class="instruction">Upload a CSV of vendor domains to start validation.</p>
-                
-                <form method="post" enctype="multipart/form-data" action="https://pvd.pei.mybluehost.me/form/9c8d7e6f-5a4b-4c3d-8e2f-1a0b9c8d7e6f">
-                    <div class="file-drop-zone" id="dropZone">
-                        <input type="file" name="domains_csv" required accept=".csv" id="fileInput">
-                        <div class="file-icon">📁</div>
-                        <div class="file-label">Click to select or drag and drop your CSV file</div>
-                        <div class="file-hint">Only .csv files are accepted</div>
-                    </div>
-                    
-                    <div class="selected-file" id="selectedFile"></div>
-                    
-                    <button type="submit" class="submit-btn">Start Validation</button>
-                </form>
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Upload Card -->
+        <div class="upload-card">
+            <div class="upload-header">
+                <h2>Upload Your Vendor List</h2>
+                <p>Submit a CSV file containing vendor domains to begin automated validation</p>
             </div>
+
+            <form method="post" enctype="multipart/form-data" action="https://pvd.pei.mybluehost.me/form/9c8d7e6f-5a4b-4c3d-8e2f-1a0b9c8d7e6f">
+                <div class="file-drop-zone" id="dropZone">
+                    <input type="file" name="domains_csv" required accept=".csv" id="fileInput">
+                    <div class="upload-icon">📁</div>
+                    <div class="file-label">Click to select or drag and drop your CSV file</div>
+                    <div class="file-hint">Only .csv files are accepted • Maximum file size: 10MB</div>
+                </div>
+                
+                <div class="selected-file" id="selectedFile">
+                    <span class="selected-file-icon">✓</span>
+                    <span id="fileName"></span>
+                </div>
+                
+                <button type="submit" class="submit-btn">Start Validation</button>
+            </form>
         </div>
 
+        <!-- Info Section -->
         <div class="info-section">
-            <h2>What is the CPS Vendor Validator?</h2>
-            <p class="summary">Upload a list of vendor websites, and instantly determine which ones sell products qualified for CPS extended warranties.</p>
+            <div class="info-header">
+                <h2>How the Validator Works</h2>
+                <p>Our AI-powered system analyzes vendor websites to determine CPS warranty eligibility</p>
+            </div>
             
             <div class="info-grid">
-                <div class="info-block">
-                    <h3>How It Works</h3>
+                <div class="info-card">
+                    <h3>Validation Process</h3>
                     <ul class="feature-list">
-                        <li><strong>Smart Crawling:</strong> Fetches pages using direct fetch or advanced unblockers for bot-protected sites.</li>
-                        <li><strong>AI Classification:</strong> Utilizes DeepSeek to analyze page titles, descriptions, and menus against the CPS coverage policy (Covered: electronics, appliances, tools, firearms; Excluded: apparel, food, services, software).</li>
-                        <li><strong>Detailed Verdicts:</strong> Delivers a Pass/Fail/Mixed verdict, confidence score, category mapping, and quoted evidence.</li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span><strong>Smart Crawling:</strong> Advanced fetching with bot protection bypass for restricted sites</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span><strong>AI Analysis:</strong> DeepSeek AI evaluates content against CPS coverage policies</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span><strong>Category Mapping:</strong> Identifies electronics, appliances, tools, firearms (covered) vs apparel, food, services (excluded)</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span><strong>Evidence-Based:</strong> Provides confidence scores with quoted page evidence</span>
+                        </li>
                     </ul>
                 </div>
                 
-                <div class="info-block">
-                    <h3>What You Receive</h3>
+                <div class="info-card">
+                    <h3>Deliverables</h3>
                     <ul class="feature-list">
-                        <li><strong>Automated Google Sheet logging</strong> (one row per vendor) + a run summary.</li>
-                        <li><strong>Email delivery</strong> with the comprehensive results CSV attached.</li>
-                        <li><strong>Duplicate skipping</strong> to save time and API costs.</li>
-                        <li><strong>High-speed parallel processing</strong> (~20 sites at a time) at fractions of a cent per site.</li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span><strong>Automated Logging:</strong> Google Sheets integration with detailed vendor results</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span><strong>Email Reports:</strong> Comprehensive CSV results delivered to your inbox</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span><strong>Smart Deduplication:</strong> Skips previously validated domains to save time</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span><strong>High-Speed Processing:</strong> Parallel validation of ~20 sites simultaneously</span>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Consumer Priority Service. All rights reserved. | Factory-Authorized Protection Plans</p>
+    </footer>
+
     <script>
         const fileInput = document.getElementById('fileInput');
         const dropZone = document.getElementById('dropZone');
         const selectedFile = document.getElementById('selectedFile');
+        const fileName = document.getElementById('fileName');
 
         fileInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
-                selectedFile.textContent = '✓ Selected: ' + file.name;
+                fileName.textContent = file.name;
                 selectedFile.classList.add('visible');
+                dropZone.style.borderColor = 'var(--cps-dark-blue)';
+                dropZone.style.background = 'linear-gradient(135deg, #d4e5f0 0%, #e8f4f8 100%)';
             }
         });
 
