@@ -27,15 +27,86 @@
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
       padding: 40px;
       width: 100%;
-      max-width: 420px;
+      max-width: 800px;
       text-align: center;
     }
 
     h1 {
       color: #1a1a2e;
-      font-size: 24px;
+      font-size: 28px;
       font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .info-section {
+      text-align: left;
+      margin-bottom: 32px;
+    }
+
+    .info-section h2 {
+      color: #1a1a2e;
+      font-size: 20px;
+      font-weight: 600;
       margin-bottom: 12px;
+    }
+
+    .tagline {
+      color: #374151;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      background: #f3f4f6;
+      padding: 16px;
+      border-radius: 8px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .feature-card {
+      background: #f9fafb;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: left;
+      border: 1px solid #e5e7eb;
+    }
+
+    .feature-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .feature-card h3 {
+      color: #1a1a2e;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .feature-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .feature-card li {
+      color: #6b7280;
+      font-size: 13px;
+      line-height: 1.7;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .feature-card li::before {
+      content: "•";
+      color: #667eea;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
     }
 
     p.instructions {
@@ -119,9 +190,54 @@
 <body>
   <div class="card">
     <h1>CPS Vendor Validator</h1>
-    <p class="instructions">Upload a CSV of vendor domains to start validation.</p>
     
+    <section class="info-section">
+      <h2>What It Does</h2>
+      <p class="tagline">You give it a list of vendor websites, and it tells you which ones sell products CPS can write extended warranties on.</p>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <h3>How It Works</h3>
+          <ul>
+            <li>Fetches each website (direct fetch first, Bright Data for bot-protected sites)</li>
+            <li>Reads page content — title, description, product/category menu</li>
+            <li>Classifies with DeepSeek against CPS coverage policy</li>
+            <li>Covered: electronics, appliances, tools, firearms</li>
+            <li>Excluded: apparel, food, services, software</li>
+          </ul>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>What You Get</h3>
+          <ul>
+            <li>Verdict: Pass / Fail / Mixed per domain</li>
+            <li>Confidence score & matched category</li>
+            <li>Real quoted evidence + one-line reason</li>
+            <li>Results written to Google Sheet</li>
+            <li>Email with CSV attached</li>
+            <li>Automatic duplicate skipping</li>
+          </ul>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Fast & Affordable</h3>
+          <ul>
+            <li>Processes ~20 domains in parallel</li>
+            <li>~$0.002 per site (often less)</li>
+            <li>Easy sites skip Bright Data proxy</li>
+            <li>Automatic provider outage detection</li>
+            <li>Turns hours of manual work into minutes</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <form method="post" enctype="multipart/form-data" action="https://pvd.pei.mybluehost.me/form/9c8d7e6f-5a4b-4c3d-8e2f-1a0b9c8d7e6f">
+      <p class="instructions">Upload a CSV of vendor domains to start validation.</p>
+      
       <div class="form-group">
         <label for="domains_csv">CSV File</label>
         <input type="file" id="domains_csv" name="domains_csv" accept=".csv" required>
